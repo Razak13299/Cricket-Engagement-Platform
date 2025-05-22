@@ -14,10 +14,17 @@ const Prediction = require('./models/Prediction');
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server, {
-    cors: { origin: 'http://localhost:3000', methods: ['GET', 'POST'], credentials: true }
+    cors: {
+        origin: 'https://razak13299.github.io', // GitHub Pages frontend
+        methods: ['GET', 'POST'],
+        credentials: true
+    }
 });
 
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({
+    origin: 'https://razak13299.github.io',
+    credentials: true
+}));
 app.use(express.json());
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 app.use('/sample_avatars', express.static(path.join(__dirname, 'sample_avatars')));
@@ -27,7 +34,7 @@ let predictions = {};
 let scores = {};
 let quizScores = {};
 let countdown = 30;
-let connectedUsers = {}; // { username: { socketId, avatar } }
+let connectedUsers = {};
 let cricketQuestions = [];
 
 // Load quiz questions
@@ -71,7 +78,7 @@ io.on('connection', (socket) => {
 
     socket.on('chatMessage', (msg) => {
         console.log('💬', msg);
-        io.emit('message', msg); // { username, avatar, text, time }
+        io.emit('message', msg);
     });
 
     socket.on('submitPrediction', async ({ username, prediction }) => {
@@ -150,19 +157,19 @@ setInterval(async () => {
 // Emit quiz every 45 seconds
 setInterval(emitRandomCricketQuiz, 45000);
 
-// MongoDB connection
-mongoose.connect('mongodb://localhost:27017/cricket-app', {
+// MongoDB Atlas connection
+mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-.then(() => console.log('✅ MongoDB Connected'))
+.then(() => console.log('✅ MongoDB Connected (Atlas)'))
 .catch(err => console.error('❌ MongoDB Error:', err));
 
 // Health check
 app.get('/', (req, res) => {
-    res.send('Cricket Engagement Platform Backend');
+    res.send('Cricket Engagement Platform Backend is running ✅');
 });
 
 // Start server
 const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log(`🚀 Server running at http://localhost:${PORT}`));
+server.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
