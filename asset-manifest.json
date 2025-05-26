@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/Cricket-Engagement-Platform/static/js/main.ea381479.js",
+    "main.js": "/Cricket-Engagement-Platform/static/js/main.bb37e23d.js",
     "index.html": "/Cricket-Engagement-Platform/index.html",
-    "main.ea381479.js.map": "/Cricket-Engagement-Platform/static/js/main.ea381479.js.map"
+    "main.bb37e23d.js.map": "/Cricket-Engagement-Platform/static/js/main.bb37e23d.js.map"
   },
   "entrypoints": [
-    "static/js/main.ea381479.js"
+    "static/js/main.bb37e23d.js"
   ]
 }
