@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import io from 'socket.io-client';
+import socket from './socket'; // <-- Import from new socket.js
 import LiveQuiz from './LiveQuiz';
 import AvatarPicker from './AvatarPicker';
-
-const socket = io('http://localhost:5000');
 
 const ChatRoom = () => {
     const [username, setUsername] = useState('');
@@ -72,7 +70,7 @@ const ChatRoom = () => {
 
     const getPrediction = async () => {
         try {
-            const response = await fetch('http://localhost:5001/predict');
+            const response = await fetch('https://your-backend-url.onrender.com/predict');
             const data = await response.json();
             setChat((prevChat) => [...prevChat, {
                 username: "AI",
