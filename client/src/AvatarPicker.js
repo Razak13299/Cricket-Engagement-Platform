@@ -8,7 +8,7 @@ const sampleAvatars = [
 ];
 
 const AvatarPicker = ({ selectedAvatar, setSelectedAvatar }) => {
-    const baseUrl = 'http://localhost:5000/sample_avatars/';
+    const baseUrl = 'https://cricket-backend-uswr.onrender.com/sample_avatars/';
 
     return (
         <div style={{ marginTop: '30px', textAlign: 'center' }}>
